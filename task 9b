@@ -1,0 +1,16 @@
+import openai
+
+openai.api_key = "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"
+
+messages = []
+system_msg = input("What type of chatbot would you like to create?\n")
+messages.append({"role": "system", "content": system_msg})
+
+print("Your new assistant is ready! Type your query")
+while input != "quit()":
+    message = input()
+    messages.append({"role": "user", "content": message})
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+    reply = response["choices"][0]["message"]["content"]
+    messages.append({"role": "assistant", "content": reply})
+    print("\n" + reply + "\n")
